@@ -7,4 +7,5 @@ main = Blueprint('main', __name__)
 def index():
     return render_template('index.html')
 
-create_app().run()
+if __name__ == '__main__':
+    create_app().run()
