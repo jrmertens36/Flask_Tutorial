@@ -6,6 +6,7 @@
     <input name="txt" type="text">
     <button id="save" type="Submit">Send</button>
 </form>
+Show comments in insecure environment <a href="{{ url_for('comments.insecure') }}">here</a>!
 <h1>Previous comments</h1>
 
 {% for comment in comments %}
