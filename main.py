@@ -1,11 +1,15 @@
-from flask import Blueprint, render_template
-from __init__ import create_app
+from flask import Flask
 
-main = Blueprint('main', __name__)
+from comment_handler import comments_blueprint
 
-@main.route('/')
-def index():
-    return render_template('index.html')
+app = Flask(__name__)
+
+app.config['SECRET_KEY'] = 'xcde234'
+app.config['HOST'] = '127.0.0.0'
+app.config['DEBUG'] = False
+app.config.from_object('config')
+
+app.register_blueprint(comments_blueprint)
 
 if __name__ == '__main__':
-    create_app().run()
+    app.run(host=app.config.get('HOST'), debug=app.config.get('DEBUG'))
