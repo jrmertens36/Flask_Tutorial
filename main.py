@@ -5,7 +5,7 @@ from comment_handler import comments_blueprint
 app = Flask(__name__)
 
 app.config['SECRET_KEY'] = 'xcde234'
-app.config['HOST'] = '127.0.0.0'
+app.config['HOST'] = '127.0.0.1'
 app.config['DEBUG'] = False
 app.config.from_object('config')
 
