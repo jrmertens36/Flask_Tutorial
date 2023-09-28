@@ -1,11 +1,16 @@
-from flask import Blueprint, render_template, current_app, redirect, url_for,request
+from flask import Blueprint, render_template, redirect, url_for, request
 
-comments = Blueprint('comments', __name__)
+comments_blueprint = Blueprint('comments', __name__)
 
-@comments.route('/comments')
+
+@comments_blueprint.route('/')
+def index():
+    return render_template('index.html')
+
+
+@comments_blueprint.route('/comments')
 def comment():
-
-    comments=""
+    comments = ""
     try:
         f = open('comments.txt', 'r')
         f.seek(0)
@@ -17,20 +22,21 @@ def comment():
 
     return render_template('comments.html', comments=comments)
 
-@comments.route('/comments', methods=['POST'])
+
+@comments_blueprint.route('/comments', methods=['POST'])
 def comment_post():
-    comment = "\n" + request.form.get('txt')
+    comments = "\n" + request.form.get('txt')
 
     f = open('comments.txt', 'a')
-    f.writelines(comment)
+    f.writelines(comments)
     f.close()
 
     return redirect(url_for('comments.comment'))
 
-@comments.route('/insecure')
-def insecure():
 
-    comments=""
+@comments_blueprint.route('/insecure')
+def insecure():
+    comments = ""
     try:
         f = open('comments.txt', 'r')
         f.seek(0)
@@ -39,7 +45,6 @@ def insecure():
     except:
         f = open('comments.txt', 'x')
         f.close()
-
 
     document = """<!DOCTYPE html>
 <html>
@@ -61,7 +66,7 @@ def insecure():
             <div class="container has-text-centered">"""
 
     for c in comments:
-        document = document +"<br>" + c
+        document = document + "<br>" + c
 
     document = document + " </div>  </div> </body>"
 
