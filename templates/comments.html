@@ -13,8 +13,9 @@
     <table class="data-table">
         <thead>
             <tr>
-                <th>Timestamp</th>
+                <th>Datum</th>
                 <th>Text</th>
+                <th>ChatGPT</th>
             </tr>
         </thead>
         <tbody>
@@ -25,6 +26,9 @@
                     </td>
                     <td>
                         {{comment.comment}}
+                    </td>
+                     <td>
+                        {{comment.chatgpt}}
                     </td>
                 </tr>
             {% endfor %}

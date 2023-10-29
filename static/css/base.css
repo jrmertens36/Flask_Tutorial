@@ -310,12 +310,12 @@ body {
 
 .data-table{
     border-spacing: 1em;
-    vertical-align: top;
     text-align: left;
     width: 90%;
 }
 
 .data-table td {
+    vertical-align: top;
     border-bottom: 2px solid white;
 }
 

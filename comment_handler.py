@@ -3,6 +3,8 @@ from datetime import datetime
 
 from flask import Blueprint, render_template, redirect, url_for, request, current_app
 
+from chatgpt import check_comment
+
 comment_handler_blueprint = Blueprint('comment_handler', __name__)
 
 
@@ -38,9 +40,11 @@ def comment_post():
         pass
 
     text = request.form.get('txt')
+    chatgpt = check_comment(text)
     new_comment = {
         "timestamp": str(datetime.now().strftime("%d.%m.%Y %H:%M")),
-        "comment": text
+        "comment": text,
+        "chatgpt": chatgpt
     }
     existing_comments.append(new_comment)
 
