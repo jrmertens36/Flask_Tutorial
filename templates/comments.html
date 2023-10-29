@@ -3,13 +3,33 @@
 {% block content %}
 <h1>Your comment</h1>
 <form method="post" action="/comments">
-    <input name="txt" type="text">
-    <button id="save" type="Submit">Send</button>
+    <div class="input-container">
+        <textarea id="multiline-input" name="txt" type="text" rows="2"></textarea>
+        <button id="save" type="Submit">Send</button>
+    </div>
 </form>
 <h1>Previous comments</h1>
 
-{% for comment in comments %}
-    {{comment}} <br>
-{% endfor %}
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>Timestamp</th>
+                <th>Text</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for comment in comments %}
+                <tr>
+                    <td>
+                        {{comment.timestamp}}
+                    </td>
+                    <td>
+                        {{comment.comment}}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+</table>
+
 
 {% endblock %}

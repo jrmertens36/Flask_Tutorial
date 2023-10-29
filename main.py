@@ -6,8 +6,10 @@ app = Flask(__name__)
 
 app.config['SECRET_KEY'] = 'xcde234'
 app.config['HOST'] = '127.0.0.1'
-app.config['DEBUG'] = False
+app.config['DEBUG'] = True
 app.config['PORT'] = 5000
+
+app.config['CFILE'] = 'comments.json'
 
 app.config.from_pyfile('config.py', silent=True)
 
