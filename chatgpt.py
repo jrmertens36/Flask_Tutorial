@@ -1,9 +1,11 @@
+import os
+
 from flask import current_app
 from openai import OpenAI
 
 client = OpenAI(
     # defaults to os.environ.get("OPENAI_API_KEY")
-    api_key='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'
+    api_key=os.environ.get("OPENAI_API_KEY")
 )
 
 def get_completion(prompt, model="gpt-3.5-turbo", temperature=0):
