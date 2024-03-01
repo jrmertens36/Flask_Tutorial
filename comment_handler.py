@@ -1,6 +1,39 @@
+import sqlite3
+
 from flask import Blueprint, render_template, redirect, url_for, request
 
 comments_blueprint = Blueprint('comments', __name__)
+
+
+@comments_blueprint.route('/login')
+def login():
+    return render_template('login.html')
+
+
+@comments_blueprint.route('/login', methods=["POST"])
+def login_post():
+    username = request.form.get('username')
+    password = request.form.get('password')
+
+    conn = sqlite3.connect('benutzerdatenbank.db')
+    cursor = conn.cursor()
+
+    sql = f"SELECT * FROM user WHERE username = '{username}' AND password = '{password}'"
+    cursor.execute(sql)
+
+    # Ergebnis abrufen
+    ergebnis = cursor.fetchone()
+
+    # Überprüfen, ob ein Benutzer mit den angegebenen Daten gefunden wurde
+    if ergebnis:
+        msg = f"Hallo {ergebnis[3]}!"
+    else:
+        msg = "Falscher Benutzername oder falsches Passwort."
+
+    # Verbindung schließen
+    conn.close()
+
+    return render_template('login.html', success=msg)
 
 
 @comments_blueprint.route('/')
